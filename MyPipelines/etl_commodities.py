@@ -21,8 +21,6 @@ def main():
     # Hacer la solicitud GET a la API con los encabezados
     response = requests.get(url, headers=headers)
 
-
-
     # Verificar que la solicitud fue exitosa
     if response.status_code == 200:
         # Convertir la respuesta JSON a un DataFrame de pandas
@@ -46,10 +44,12 @@ def main():
     engine = create_engine(conn_str)
 
     try:
-        # Cargar el DataFrame en la tabla de Redshift
-        #with engine.connect() as connection:
+        # Cargar el DataFrame en la tabla de Redshift        
         df.to_sql(name=redshift_table, con=engine, schema=redshift_schema,if_exists='replace', index=False)
         print(f'Datos cargados en la tabla {redshift_table} de Redshift.')
+        # Loguear la cantidad de registros insertados
+        registros_insertados = len(df)
+        print(f'Se insertaron {registros_insertados} registros en la tabla {redshift_table} de Redshift.')
     except Exception as e:
         print(f'Error al cargar los datos en Redshift: {e}')    
         
