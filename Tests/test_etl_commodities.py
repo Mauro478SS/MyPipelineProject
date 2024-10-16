@@ -2,9 +2,9 @@ import unittest
 from unittest.mock import patch, MagicMock
 import sys
 import os
+
 sys.path.append(os.path.abspath('./MyPipelines'))
 import etl_commodities 
-
 
 class TestMiScript(unittest.TestCase):
 
