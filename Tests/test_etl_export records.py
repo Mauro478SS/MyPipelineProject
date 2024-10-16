@@ -4,7 +4,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath('./MyPipelines'))
-import etl_export_records 
+import etl_export_records
 
 class TestEtlCommodities(unittest.TestCase):
 
