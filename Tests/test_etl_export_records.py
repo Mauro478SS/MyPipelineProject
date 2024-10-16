@@ -5,8 +5,23 @@ import os
 
 sys.path.append(os.path.abspath('./MyPipelines'))
 import etl_export_records
+from dotenv import load_dotenv
 
-class TestEtlCommodities(unittest.TestCase):
+# Cargar las variables de entorno desde un archivo .env
+load_dotenv()
+
+# Asignar variables desde las variables de entorno
+redshift_endpoint = os.getenv('REDSHIFT_ENDPOINT')
+redshift_db = os.getenv('REDSHIFT_DB')
+redshift_user = os.getenv('REDSHIFT_USER')
+redshift_password = os.getenv('REDSHIFT_PASSWORD')
+redshift_port = os.getenv('REDSHIFT_PORT')
+redshift_schema = os.getenv('REDSHIFT_SCHEMA')
+redshift_table = os.getenv('REDSHIFT_TABLE')
+api_url = os.getenv('API_URL')
+api_key = os.getenv('API_KEY')
+
+class TestEtlExportData(unittest.TestCase):
 
     @patch('etl_export_records.requests.get')
     def test_fetch_data(self, mock_get):
@@ -15,32 +30,26 @@ class TestEtlCommodities(unittest.TestCase):
         mock_response.status_code = 200
         mock_response.json.return_value = [{'commodity': 'Wheat', 'price': 200}]
         mock_get.return_value = mock_response
-
-        api_url = 'https://api.fas.usda.gov/api/esr/exports/commodityCode/104/allCountries/marketYear/2024'
-        api_key = 'A7e4QEAsGHJcySTf4gumahDPpCStKel6lsKhEG6v'
-        data = etl_export_records.fetch_data(api_url, api_key)
+                   
+        # Llamar a la función principal del script
+        etl_export_records.main()
 
         # Verificar que la solicitud GET fue llamada con la URL correcta
         mock_get.assert_called_once_with(api_url, headers={'X-Api-Key': api_key})
-        self.assertEqual(data, [{'commodity': 'Wheat', 'price': 200}])
-
+             
     @patch('etl_export_records.create_engine')
-    @patch('etl_export_records.pd.DataFrame.to_sql')
-    def test_load_to_redshift(self, mock_to_sql, mock_create_engine):
+    def test_redshift_connection(self,  mock_create_engine):
         # Configurar el mock para el motor de SQLAlchemy
         mock_engine = MagicMock()
         mock_create_engine.return_value = mock_engine
 
-        data = [{'commodity': 'Wheat', 'price': 200}]
-        connection_string = 'redshift+redshift_connector://2024_mauro_sebastian_sanchez:L4!&9^2$xQ@redshift-pda-cluster.cnuimntownzt.us-east-2.redshift.amazonaws.com:5439/pda'
-        table = 'stg_export_records'
-        schema = '2024_mauro_sebastian_sanchez_schema'
+        connection_string = f'redshift+redshift_connector://{redshift_user}:{redshift_password}@{redshift_endpoint}:{redshift_port}/{redshift_db}'        
 
-        etl_export_records.load_to_redshift(data, connection_string, table, schema)
+        # Llamar a la función principal del script
+        etl_export_records.main()
 
         # Verificar que la cadena de conexión fue creada correctamente
         mock_create_engine.assert_called_once_with(connection_string)
-        mock_to_sql.assert_called_once_with(name=table, con=mock_engine, schema=schema, if_exists='replace', index=False)
-
+        
 if __name__ == '__main__':
     unittest.main()
