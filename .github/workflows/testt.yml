@@ -25,6 +25,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'  # Ajusta la versión según tus necesidades
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          
       - name: Run tests
         env:
           PYTHONPATH: ${{ github.workspace }}
