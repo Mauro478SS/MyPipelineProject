@@ -29,8 +29,8 @@ def create_fact_table():
     try:
         with engine.connect() as connection:  
             
-            logging.info(f"Borrando registros existentes en la tabla {redshift_fact_table}...")
-            connection.execute(f'DELETE FROM "{redshift_schema}"."{redshift_fact_table}"')
+            #logging.info(f"Borrando registros existentes en la tabla {redshift_fact_table}...")
+            #connection.execute(f'DELETE FROM "{redshift_schema}"."{redshift_fact_table}"')
                         
             logging.info(f"Poblando la tabla de hechos {redshift_fact_table}...")
             result = connection.execute(f"""
