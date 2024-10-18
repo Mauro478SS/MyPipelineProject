@@ -36,7 +36,6 @@ def main():
         # Convertir la respuesta JSON a un DataFrame de pandas
         data = response.json()
         df = pd.DataFrame(data)        
-        df_limited= df.head(5)
         
         # Crear la cadena de conexión
         conn_str = f'redshift+redshift_connector://{redshift_user}:{redshift_password}@{redshift_endpoint}:{redshift_port}/{redshift_db}'
@@ -51,10 +50,10 @@ def main():
                     
             # Cargar el DataFrame en la tabla de Redshift               
             logging.info(f"Cargando registros en la tabla de {redshift_table} ...")
-            df_limited.to_sql(name=redshift_table, con=engine, schema=redshift_schema,if_exists='append', index=False)        
+            df.to_sql(name=redshift_table, con=engine, schema=redshift_schema,if_exists='append', index=False)        
             
             # Loguear la cantidad de registros insertados
-            registros_insertados = len(df_limited)
+            registros_insertados = len(df)
             logging.info(f'Se insertaron {registros_insertados} registros en la tabla {redshift_table} de Redshift.')
         except Exception as e:
             logging.error(f'Error al cargar los datos en Redshift: {e}')
