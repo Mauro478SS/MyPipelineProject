@@ -9,7 +9,11 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
                     
 def main():        
-
+    """
+    Función principal que orquesta el proceso ETL para los datos de commodities.
+    Carga variables de entorno, realiza una solicitud a la API commodities, transforma los datos obtenidos
+    y los carga en una tabla de Amazon Redshift.
+    """
     # Asignar variables desde las variables de entorno    
     logging.info("Cargando variables de entorno...")
     load_dotenv()

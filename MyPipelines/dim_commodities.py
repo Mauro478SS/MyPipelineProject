@@ -8,6 +8,11 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
                          
 def main():
+    """
+    Función principal que carga la dimension del tipo 2 DIM_COMMODITIES
+    Primero marca registros actuales como históricos si hay cambios haciendo un update
+    Luego inserta nuevos registros o registros actualizados a la dimension
+    """
     logging.info("Actualizando la dimensión (dim_commodities)...")
     
     # Asignar variables desde las variables de entorno    
