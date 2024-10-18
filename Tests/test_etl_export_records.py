@@ -54,9 +54,6 @@ class TestEtlExportData(unittest.TestCase):
              
     @patch('etl_export_records.create_engine')
     def test_redshift_connection(self,  mock_create_engine):
-         # Configurar las variables de entorno simuladas
-
-
         # Configurar el mock para el motor de SQLAlchemy
         mock_engine = MagicMock()
         mock_create_engine.return_value = mock_engine
