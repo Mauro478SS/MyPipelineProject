@@ -13,8 +13,13 @@ El proyecto consume diferentes APIs para cargar cuatro tablas de stage y luego a
     ​/api​/esr​/exports​/commodityCode​/{commodityCode}​/allCountries​/marketYear​/{marketYear} 
         Given Commodity Code (Ex: 104 for Wheat - White ) and MarketYear (Ex: 2017) this API End point will return a list of US Export records of White Wheat to all applicable countries from USA for the given Market Year. Please see DataReleaseDates end point to get a list of all Commodities and the corresponding Market Year data.
 
+<<<<<<< HEAD
 # Ruta de los scripts:
     MyPipelineProject/MyPipelines
+=======
+# Ruta de los scripts: 
+MyPipelineProject/MyPipelines
+>>>>>>> 913c741daf24405c29943b499185ab296d5bb295
 
 Procesos de ingesta STAGE y tabla target:
     etl_commodities.py >> stg_commodities
