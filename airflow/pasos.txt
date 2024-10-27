@@ -1,0 +1,8 @@
+1) Clonar el Repositorio https://github.com/Mauro478SS/MyPipelineProject
+2) Modificar las variables del proyecto en el archivo MyPipelines\.env donde se debera actualizar el usuario y clave de la base REDSHIFT_USER/	REDSHIFT_PASSWORD
+3) ejecutar el script MyPipelines\CreateDatabaseModel.sql en Redshift para crear el modelo. Previamente editar el archivo indicando el esquema target <Esquema_target>
+3) Ejecutar Docker-Desktop
+4) Abrir PowerShell en modo administrador 
+5) cd <ruta raiz se descargo el proyecto>\airflow
+6) Ejecutar el script run_my_project.ps1 que levantara la instancia de docker y ejecutara el DAG con los procesos ETL.
+7) Monitorear la ejecucion del proceso mediando Airflow ingresando al link http://localhost:8080/home usr: airflow y pass: airflow

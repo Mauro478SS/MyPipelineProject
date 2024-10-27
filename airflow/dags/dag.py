@@ -17,11 +17,12 @@ def my_function(**kwargs):
 
 default_args = {
     'owner': 'airflow',
+    'depends_on_past': False,
     'start_date': datetime(2024, 10, 16),
     'retries': 1,
 }
 
-with DAG(dag_id='DAG_etl_pipeline', default_args=default_args, schedule_interval='0 20 * * *') as dag:
+with DAG(dag_id='DAG_etl_pipeline', default_args=default_args, schedule_interval=None,catchup=False) as dag:
     start = DummyOperator(task_id='start')
 
     load_stg_commodities = BashOperator(
