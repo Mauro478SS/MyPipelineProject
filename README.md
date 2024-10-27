@@ -16,12 +16,12 @@ El proyecto consume diferentes APIs para cargar cuatro tablas de stage y luego a
 # Pasos de Ejecucion:
 
 1) Clonar el Repositorio https://github.com/Mauro478SS/MyPipelineProject
-2) Modificar las variables del proyecto en el archivo <ruta_repo_local>/airflow/dags/MyPipelineProject/MyPipelines/.env donde se debera actualizar el usuario y clave de la base REDSHIFT_USER/	REDSHIFT_PASSWORD
+2) Modificar las variables del proyecto en el archivo <ruta_repo_local>/airflow/dags/MyPipelineProject/MyPipelines/.env donde se debera actualizar el usuario, clave y esquema de la base REDSHIFT_USER/	REDSHIFT_PASSWORD / REDSHIFT_SCHEMA
 3) Ejecutar el script <ruta_repo_local>/airflow/CreateDatabaseModel.sql en Redshift para crear el modelo. Previamente editar el archivo indicando el esquema target <Esquema_target>
 3) Abrir en windows el programa Docker-Desktop
 4) Abrir PowerShell en modo administrador 
 5) cd <ruta_repo_local>\airflow
-6) Ejecutar el script run_my_project.ps1 que levantara la instancia de docker y ejecutara el DAG con los procesos ETL.
+6) Ejecutar el script .\run_my_project.ps1 que levantara la instancia de docker y ejecutara el DAG con los procesos ETL.
 7) Monitorear la ejecucion del proceso mediando Airflow ingresando al link http://localhost:8080/home usr: airflow y pass: airflow
 
 # Documentacion
