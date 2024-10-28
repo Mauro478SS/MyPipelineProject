@@ -68,4 +68,8 @@ Docker:
 
 GITActions: 
     Se configuro el workflow test.ymal en la carpeta /workflows con la ejecucion de todos los test del proyecto.
+	
+Dashboard: 
+	Se creó un dashboard en powerBI que consume el modelo estrella y genera unos gráficos. Ruta: \MyPipelineProject\DashboardTPFinal.pbix. Los datos están importados desde Redshift.
+
 
